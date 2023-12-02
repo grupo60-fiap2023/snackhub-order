@@ -1,0 +1,14 @@
+mysql:
+  username: root
+  password: 12345678
+  schema: snackhub-order
+  #url: snackhub-order-mysql-db
+  port: 3307
+  url: 127.0.0.1
+
+server:
+  port: 8080
+  undertow:
+    threads:
+      worker: 10
+      io: 2

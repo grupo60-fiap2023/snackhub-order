@@ -1,0 +1,7 @@
+subprojects {
+    apply plugin: 'java'
+
+    test {
+        // Configurações de teste comuns, se necessário
+    }
+}

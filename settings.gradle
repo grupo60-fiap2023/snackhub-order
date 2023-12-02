@@ -1,0 +1,5 @@
+rootProject.name = 'snackHubOrder'
+include 'domain'
+include 'application'
+include 'infrastructure'
+

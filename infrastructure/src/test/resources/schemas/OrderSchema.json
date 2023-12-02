@@ -1,0 +1,27 @@
+{
+  "type": "object",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": { "type": "integer" },
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": { "type": "integer" },
+            "name": { "type": "string" },
+            "price": { "type": "number" },
+            "quantity": { "type": "integer" },
+            "category": { "type": "string" }
+          },
+          "required": ["id", "name", "price", "quantity", "category"]
+        }
+      },
+      "orderIdentifier": { "type": "string" },
+      "observation": { "type": "string" },
+      "status": { "type": "string" }
+    },
+    "required": ["id", "items", "orderIdentifier", "observation", "status"]
+  }
+}
