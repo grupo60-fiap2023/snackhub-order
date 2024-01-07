@@ -1,0 +1,37 @@
+version: '3.7'
+
+services:
+  snackhub-order-mysql-db:
+    container_name: snackhub-order-mysql-db
+    restart: always
+    image: mysql:8
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+      - MYSQL_DATABASE=snackhub-order
+    ports:
+      - 3307:3306
+    networks:
+      - snackhub_network
+    volumes:
+      - db:/var/lib/mysql
+      - ./infrastructure/src/main/resources/db.migration/init.sql:/docker-entrypoint-initdb.d/init.sql
+  snackhub-order-app:
+    container_name: snackhub-order-app
+    image: grupo60fiap2023/snackhub-order-app:latest
+    ports:
+      - 8080:8080
+    depends_on:
+      - snackhub-order-mysql-db
+    networks:
+      - snackhub_network
+    environment:
+      - WAIT_HOSTS=snackhub-order-mysql-db:3306
+      - WAIT_HOSTS_TIMEOUT=300
+      - WAIT_SLEEP_INTERVAL=30
+      - WAIT_HOST_CONNECT_TIMEOUT=30
+networks:
+  snackhub_network:
+    driver: bridge
+    name: snackhub_network
+volumes:
+  db:

@@ -19,7 +19,7 @@
         }
       },
       "orderIdentifier": { "type": "string" },
-      "observation": { "type": "string" },
+      "observation": { "type": ["string", "null"]},
       "status": { "type": "string" }
     },
     "required": ["id", "items", "orderIdentifier", "observation", "status"]
