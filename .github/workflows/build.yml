@@ -23,10 +23,13 @@ jobs:
     steps:
       - name: Wait for MySQL to be ready
         run: sleep 30
-
+      - name: Debug Directory
+        run: |
+          pwd
+          ls -R
       - name: Run Database Initialization Script
         run: |
-          cat infrastructure/src/main/resources/db.migration/init.sql | mysql -h localhost -u admin -p "123456" snackhub-order
+          cat ${{ github.workspace }}/infrastructure/src/main/resources/db.migration/init.sql | mysql -h localhost -u admin -p "123456" snackhub-order
   build:
     name: Build 💡
     runs-on: ubuntu-latest
