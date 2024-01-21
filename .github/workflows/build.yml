@@ -30,7 +30,7 @@ jobs:
       - name: Start MySQL Server
         run: sudo service mysql start
       - name: Run Database Initialization Script
-        run: mysql -h 127.0.0.1 -p"123456" -S /var/run/mysqld/mysqld.sock snackhub-order < $GITHUB_WORKSPACE/infrastructure/src/main/resources/db.migration/init.sql
+        run: mysql -h 127.0.0.1 -u root -p"123456" -S /var/run/mysqld/mysqld.sock snackhub-order < $GITHUB_WORKSPACE/infrastructure/src/main/resources/db.migration/init.sql
       - name: Cache SonarCloud packages 📦
         uses: actions/cache@v3
         with:
