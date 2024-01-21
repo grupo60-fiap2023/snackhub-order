@@ -25,10 +25,10 @@ jobs:
         run: sleep 30
       - name: Debug Directory
         run: |
-          ls -R snackhub-order/infrastructure/src/main/resources/db.migration/
+          ls -R ${{ github.workspace }}/snackHubOrder/infrastructure
       - name: Run Database Initialization Script
         run: |
-          cat snackhub-order/infrastructure/src/main/resources/db.migration/init.sql | mysql -h localhost -u admin -p "123456" snackhub-order
+          cat ${{ github.workspace }}/snackHubOrder/infrastructure/src/main/resources/db.migration/init.sql | mysql -h localhost -u admin -p "123456" snackhub-order
   build:
     name: Build 💡
     runs-on: ubuntu-latest
