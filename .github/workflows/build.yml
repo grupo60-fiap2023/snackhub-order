@@ -21,7 +21,7 @@ jobs:
           - 3306:3306
         volumes:
           - db:/var/lib/mysql
-          - $GITHUB_WORKSPACE/infrastructure/src/main/resources/db.migration/init.sql:/docker-entrypoint-initdb.d/init.sql
+          - ${{ github.workspace }}/infrastructure/src/main/resources/db.migration/init.sql:/docker-entrypoint-initdb.d/init.sql
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     steps:
       - name: Code Checkout 🔧
