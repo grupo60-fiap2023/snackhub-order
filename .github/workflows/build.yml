@@ -15,7 +15,7 @@ jobs:
         env:
           MYSQL_ROOT_PASSWORD: 123456
           MYSQL_DATABASE: snackhub-order
-          MYSQL_USER: root
+          MYSQL_USER: admin
           MYSQL_PASSWORD: 123456
         ports:
           - 3306:3306
@@ -26,7 +26,7 @@ jobs:
 
       - name: Run Database Initialization Script
         run: |
-          cat infrastructure/src/main/resources/db.migration/init.sql | mysql -h localhost -u root -p "123456" snackhub-order
+          cat infrastructure/src/main/resources/db.migration/init.sql | mysql -h localhost -u admin -p "123456" snackhub-order
   build:
     name: Build 💡
     runs-on: ubuntu-latest
