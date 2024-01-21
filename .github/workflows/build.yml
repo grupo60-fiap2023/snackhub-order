@@ -7,7 +7,7 @@ on:
     types: [ opened, synchronize, reopened ]
   workflow_dispatch:
 jobs:
-  setup-mysql:
+  setup-docker-image-to-test:
     runs-on: ubuntu-latest
     services:
       mysql:
@@ -25,16 +25,14 @@ jobs:
         run: sleep 30
       - name: Debug Directory
         run: |
-          cd ..
-          pwd
-          ls -R
+          ls -R $GITHUB_WORKSPACE
       - name: Run Database Initialization Script
         run: |
           cat $GITHUB_WORKSPACE/infrastructure/src/main/resources/db.migration/init.sql | mysql -h localhost -u admin -p "123456" snackhub-order
   build:
     name: Build 💡
     runs-on: ubuntu-latest
-    needs: setup-mysql
+    needs: setup-docker-image-to-test
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
