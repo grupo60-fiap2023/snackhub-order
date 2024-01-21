@@ -19,6 +19,9 @@ jobs:
           MYSQL_DATABASE: snackhub-order
         ports:
           - 3306:3306
+        volumes:
+          - db:/var/lib/mysql
+          - $GITHUB_WORKSPACE/infrastructure/src/main/resources/db.migration/init.sql:/docker-entrypoint-initdb.d/init.sql
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     steps:
       - name: Code Checkout 🔧
@@ -27,10 +30,6 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 17
-      - name: Start MySQL Server
-        run: sudo service mysql start
-      - name: Run Database Initialization Script
-        run: mysql -h 127.0.0.1 -u root -p"123456" -S /var/run/mysqld/mysqld.sock snackhub-order < $GITHUB_WORKSPACE/infrastructure/src/main/resources/db.migration/init.sql
       - name: Cache SonarCloud packages 📦
         uses: actions/cache@v3
         with:
