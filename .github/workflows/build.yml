@@ -28,7 +28,7 @@ jobs:
           ls -R $GITHUB_WORKSPACE
       - name: Run Database Initialization Script
         run: |
-          cat $GITHUB_WORKSPACE/infrastructure/src/main/resources/db.migration/init.sql | mysql -h localhost -u admin -p "123456" snackhub-order
+          cat snackhub-order/infrastructure/src/main/resources/db.migration/init.sql | mysql -h localhost -u admin -p "123456" snackhub-order
   build:
     name: Build 💡
     runs-on: ubuntu-latest
