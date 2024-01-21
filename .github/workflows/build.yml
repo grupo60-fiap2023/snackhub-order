@@ -25,7 +25,7 @@ jobs:
         run: sleep 30
       - name: Debug Directory
         run: |
-          ls -R $GITHUB_WORKSPACE
+          ls -R snackhub-order/infrastructure/src/main/resources/db.migration/
       - name: Run Database Initialization Script
         run: |
           cat snackhub-order/infrastructure/src/main/resources/db.migration/init.sql | mysql -h localhost -u admin -p "123456" snackhub-order
