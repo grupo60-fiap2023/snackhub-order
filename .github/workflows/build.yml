@@ -25,7 +25,7 @@ jobs:
         run: sleep 30
       - name: Run Database Initialization Script
         run: |
-          cat ${{ github.workspace }}/init.sql | mysql -h localhost -u admin -p "123456" snackhub-order
+          cat snackhub-order/init.sql | mysql -h localhost -u admin -p "123456" snackhub-order
   build:
     name: Build 💡
     runs-on: ubuntu-latest
