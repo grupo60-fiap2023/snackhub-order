@@ -30,24 +30,15 @@ jobs:
         run: sleep 30
       - name: Debug Directory
         run: |
-          ls -R $GITHUB_WORKSPACE
+          ls -R $GITHUB_WORKSPACE/infrastructure/src/main/resources
       - name: Run Database Initialization Script
         run: |
-          cat infrastructure/src/main/resources/db.migration/init.sql | mysql -h localhost -u admin -p "123456" snackhub-order
+          cat $GITHUB_WORKSPACE/infrastructure/src/main/resources/db.migration/init.sql | mysql -h localhost -u admin -p "123456" snackhub-order
   build:
     name: Build 💡
     runs-on: ubuntu-latest
     needs: setup-docker-image-to-test
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-      - name: Set up JDK 17 🔧
-        uses: actions/setup-java@v3
-        with:
-          java-version: 17
-          distribution: 'zulu' # Alternative distribution options are available
       - name: Cache SonarCloud packages 📦
         uses: actions/cache@v3
         with:
