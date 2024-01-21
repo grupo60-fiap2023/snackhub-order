@@ -2,6 +2,16 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '2.6.7'
     id 'io.spring.dependency-management' version '1.1.0'
+    id "org.sonarqube" version "4.4.1.3373"
+    id 'jacoco'
+}
+
+sonar {
+    properties {
+        property "sonar.projectKey", "grupo60-fiap2023_snackhub"
+        property "sonar.organization", "grupo60-fiap2023"
+        property "sonar.host.url", "https://sonarcloud.io"
+    }
 }
 
 java {
@@ -70,4 +80,51 @@ dependencyManagement {
 
 test {
     useJUnitPlatform()
+}
+
+jacoco {
+    toolVersion '0.8.10'
+}
+
+tasks.withType(Test) {
+    jacoco.includeNoLocationClasses = true
+    jacoco.excludes = ['jdk.internal.*']
+}
+
+tasks.create(name: "testCoverage", type: JacocoReport, dependsOn: "test") {
+
+    group = "Reporting"
+    description = "Generate Jacoco coverage reports for the test build."
+
+    reports {
+        html.required.set(true)
+        xml.required.set(true)
+    }
+
+    def excludes = [
+            '**/*Test*.*',
+            '**/actions/*.*',
+            '**/core/*.*',
+            '**/markers/*.*',
+            '**/services/**/*.*',
+            '**/toolwindow/*.*',
+            '**/utils/*.*'
+    ]
+
+    def javaDomainClasses = fileTree(dir: "${buildDir}/domain/classes/java/main", excludes: excludes)
+    def javaAppClasses = fileTree(dir: "${buildDir}/application/classes/java/main", excludes: excludes)
+    def javaInfraClasses = fileTree(dir: "${buildDir}/infrastructure/classes/java/main", excludes: excludes)
+    classDirectories.from = files([javaDomainClasses, javaAppClasses, javaInfraClasses])
+
+    sourceDirectories.from = files([
+            "$project.projectDir/domain/src/main/java",
+            "$project.projectDir/application/src/main/java",
+            "$project.projectDir/infrastructure/src/main/java",
+            "$buildDir/generated/source/kapt/test"
+    ])
+
+    executionData.from = files("${project.buildDir}/domain/test.exec")
+    executionData.from = files("${project.buildDir}/application/test.exec")
+    executionData.from = files("${project.buildDir}/infrastructure/test.exec")
+
 }
