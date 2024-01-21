@@ -28,7 +28,7 @@ jobs:
           java-version: 17
       - name: Debug Directory
         run: |
-          cat $GITHUB_WORKSPACE/infrastructure/src/main/resources/db.migration/init.sql | mysql -h localhost -u admin -p"123456" snackhub-order
+          cat $GITHUB_WORKSPACE/infrastructure/src/main/resources/db.migration/init.sql
       - name: Check Files in Directory
         run: ls $GITHUB_WORKSPACE/infrastructure/src/main/resources/db.migration/
       - name: Run Database Initialization Script
