@@ -29,6 +29,9 @@ jobs:
           java-version: 17
       - name: Start MySQL Server
         run: sudo service mysql start
+      - name: Grant Permissions
+        run: |
+          mysql -h 127.0.0.1 -u root -p"123456" -S /var/run/mysqld/mysqld.sock < ${{ github.workspace }}/infrastructure/src/test/resources/grant_permissions.sql
       - name: Run Database Initialization Script
         run: mysql -h 127.0.0.1 -u root -p"123456" -S /var/run/mysqld/mysqld.sock snackhub-order < $GITHUB_WORKSPACE/infrastructure/src/main/resources/db.migration/init.sql
       - name: Cache SonarCloud packages 📦
