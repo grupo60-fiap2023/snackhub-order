@@ -21,11 +21,19 @@ jobs:
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 17 🔧
+        uses: actions/setup-java@v1
+        with:
+          java-version: 17
       - name: Wait for MySQL to be ready
         run: sleep 30
+      - name: Debug Directory
+        run: |
+          ls -R $GITHUB_WORKSPACE
       - name: Run Database Initialization Script
         run: |
-          cat ./init.sql | mysql -h localhost -u admin -p "123456" snackhub-order
+          cat infrastructure/src/main/resources/db.migration/init.sql | mysql -h localhost -u admin -p "123456" snackhub-order
   build:
     name: Build 💡
     runs-on: ubuntu-latest
