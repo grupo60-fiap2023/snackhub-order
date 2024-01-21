@@ -26,14 +26,14 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 17
-      - name: Wait for MySQL to be ready
-        run: sleep 30
       - name: Debug Directory
         run: |
-          ls -R $GITHUB_WORKSPACE/infrastructure/src/main/resources
+          cat $GITHUB_WORKSPACE/infrastructure/src/main/resources/db.migration/init.sql | mysql -h localhost -u admin -p"123456" snackhub-order
+      - name: Check Files in Directory
+        run: ls $GITHUB_WORKSPACE/infrastructure/src/main/resources/db.migration/
       - name: Run Database Initialization Script
         run: |
-          cat $GITHUB_WORKSPACE/infrastructure/src/main/resources/db.migration/init.sql | mysql -h localhost -u admin -p "123456" snackhub-order
+          mysql -h localhost -u admin -p"123456" snackhub-order < $GITHUB_WORKSPACE/infrastructure/src/main/resources/db.migration/init.sql
   build:
     name: Build 💡
     runs-on: ubuntu-latest
