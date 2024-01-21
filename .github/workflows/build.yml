@@ -26,14 +26,10 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 17
-      - name: Debug Directory
-        run: |
-          cat $GITHUB_WORKSPACE/infrastructure/src/main/resources/db.migration/init.sql
-      - name: Check Files in Directory
-        run: ls $GITHUB_WORKSPACE/infrastructure/src/main/resources/db.migration/
+      - name: Start MySQL Server
+        run: sudo service mysql start
       - name: Run Database Initialization Script
-        run: |
-          mysql -h localhost -u admin -p"123456" snackhub-order < $GITHUB_WORKSPACE/infrastructure/src/main/resources/db.migration/init.sql
+        run: mysql -h localhost -u admin -p"123456" -S /var/run/mysqld/mysqld.sock snackhub-order < $GITHUB_WORKSPACE/infrastructure/src/main/resources/db.migration/init.sql
   build:
     name: Build 💡
     runs-on: ubuntu-latest
