@@ -7,11 +7,32 @@ on:
     types: [ opened, synchronize, reopened ]
   workflow_dispatch:
 jobs:
+  setup-mysql:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8
+        env:
+          MYSQL_ROOT_PASSWORD: 123456
+          MYSQL_DATABASE: snackhub-order
+          MYSQL_USER: root
+          MYSQL_PASSWORD: 123456
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+    steps:
+      - name: Wait for MySQL to be ready
+        run: sleep 30
+
+      - name: Run Database Initialization Script
+        run: |
+          cat infrastructure/src/main/resources/db.migration/init.sql | mysql -h localhost -u root -p "123456" snackhub-order
   build:
     name: Build 💡
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
       - name: Set up JDK 17 🔧
