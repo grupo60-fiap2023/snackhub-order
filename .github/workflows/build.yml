@@ -25,6 +25,7 @@ jobs:
         run: sleep 30
       - name: Debug Directory
         run: |
+          cd ..
           pwd
           ls -R
       - name: Run Database Initialization Script
