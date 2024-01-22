@@ -9,6 +9,8 @@ public record OrderResponse (
         @JsonProperty("items") List<OrderItemResponse> items,
         @JsonProperty("orderIdentifier") String orderIdentifier,
         @JsonProperty("observation") String observation,
-        @JsonProperty("status") String status
+        @JsonProperty("status") String status,
+        @JsonProperty("timestamp") String timestamp
+
 ) {
 }
