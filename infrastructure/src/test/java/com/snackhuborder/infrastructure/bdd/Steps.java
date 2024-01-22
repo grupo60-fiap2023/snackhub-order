@@ -1,6 +1,7 @@
 package com.snackhuborder.infrastructure.bdd;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.snackhuborder.domain.order.OrderStatus;
 import com.snackhuborder.infrastructure.order.models.CreateOrderRequest;
@@ -63,9 +64,12 @@ public class Steps {
 
     @Quando("requisitar a alteração do pedido")
     public void updateRequest() throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
         response = given()
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .body(new ObjectMapper().writeValueAsString(new UpdateStatusRequest(OrderStatus.FINISHED)))
+                .body(objectMapper.writeValueAsString(new UpdateStatusRequest(OrderStatus.FINISHED)))
                 .when()
                 .put(ENDPOINT_MENSAGENS+ "{id}", orderResponse.id().toString());
     }
