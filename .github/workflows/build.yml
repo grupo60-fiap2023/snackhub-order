@@ -19,8 +19,6 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 17
-      - name: Set up Docker Compose
-        run: docker-compose up -d
       - name: Cache SonarCloud packages 📦
         uses: actions/cache@v3
         with:
@@ -40,8 +38,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: ./gradlew build sonar --info
-      - name: Tear down Docker Compose
-        run: docker-compose down
 
   code-analisys:
     name: Code Analisys 👀
