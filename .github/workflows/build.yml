@@ -11,15 +11,7 @@ jobs:
   build:
     name: Build 💡
     runs-on: ubuntu-latest
-    services:
-      mysql:
-        image: mysql:8
-        env:
-          MYSQL_ROOT_PASSWORD: 123456
-          MYSQL_DATABASE: snackhub-order
-        ports:
-          - 3306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
     steps:
       - name: Code Checkout 🔧
         uses: actions/checkout@v3
@@ -27,13 +19,8 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 17
-      - name: Start MySQL Server
-        run: sudo service mysql start
-      - name: Grant Permissions
-        run: |
-          mysql -h 127.0.0.1 -u root -p"123456" -S /var/run/mysqld/mysqld.sock < ${{ github.workspace }}/infrastructure/src/test/resources/grant_permissions.sql
-      - name: Run Database Initialization Script
-        run: mysql -h 127.0.0.1 -u root -p"123456" -S /var/run/mysqld/mysqld.sock snackhub-order < $GITHUB_WORKSPACE/infrastructure/src/main/resources/db.migration/init.sql
+      - name: Set up Docker Compose
+        run: docker-compose up -d
       - name: Cache SonarCloud packages 📦
         uses: actions/cache@v3
         with:
@@ -53,6 +40,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: ./gradlew build sonar --info
+      - name: Tear down Docker Compose
+        run: docker-compose down
 
   code-analisys:
     name: Code Analisys 👀
