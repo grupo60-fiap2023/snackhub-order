@@ -74,7 +74,6 @@ dependencies {
 dependencyManagement {
     imports {
         'org.springframework.cloud:spring-cloud-dependencies:2021.0.1'
-
     }
 }
 
@@ -123,8 +122,10 @@ tasks.create(name: "testCoverage", type: JacocoReport, dependsOn: "test") {
             "$buildDir/generated/source/kapt/test"
     ])
 
-    executionData.from = files("${project.buildDir}/domain/test.exec")
-    executionData.from = files("${project.buildDir}/application/test.exec")
-    executionData.from = files("${project.buildDir}/infrastructure/test.exec")
+    executionData.from = files([
+            "${project.buildDir}/domain/test.exec",
+            "${project.buildDir}/application/test.exec",
+            "${project.buildDir}/infrastructure/test.exec"
+    ])
 
 }
