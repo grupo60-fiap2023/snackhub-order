@@ -11,19 +11,22 @@ import com.snackhuborder.infrastructure.util.OrderHelper;
 import io.cucumber.java.pt.Dado;
 import io.cucumber.java.pt.Então;
 import io.cucumber.java.pt.Quando;
+import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import org.junit.jupiter.api.BeforeEach;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
-
 public class Steps {
 
     private Response response;
 
     private OrderResponse orderResponse;
 
-    private String ENDPOINT_MENSAGENS = "http://127.0.0.1:8080/orders/";
+    private String ENDPOINT_MENSAGENS = "http://localhost:8080/orders/";
 
     @Quando("submeter uma requisição de pedido")
     public OrderResponse orderRequest() {

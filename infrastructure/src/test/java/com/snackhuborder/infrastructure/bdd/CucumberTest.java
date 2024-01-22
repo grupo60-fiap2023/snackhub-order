@@ -8,6 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 @Suite
 @IncludeEngines("cucumber")
 @SelectClasspathResource("features")
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT, properties = {"server.port=8080"})
 public class CucumberTest {
 }
