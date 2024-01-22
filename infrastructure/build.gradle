@@ -8,7 +8,7 @@ plugins {
 
 sonar {
     properties {
-        property "sonar.projectKey", "grupo60-fiap2023_snackhub"
+        property "sonar.projectKey", "snackhub-order"
         property "sonar.organization", "grupo60-fiap2023"
         property "sonar.host.url", "https://sonarcloud.io"
     }
