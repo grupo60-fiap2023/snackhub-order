@@ -22,7 +22,7 @@ public class Steps {
 
     private OrderResponse orderResponse;
 
-    private String ENDPOINT_MENSAGENS = "http://localhost:8080/orders/";
+    private String ENDPOINT_MENSAGENS = "http://snackhub-order-app:8080/orders/";
 
     @Quando("submeter uma requisição de pedido")
     public OrderResponse orderRequest() {
