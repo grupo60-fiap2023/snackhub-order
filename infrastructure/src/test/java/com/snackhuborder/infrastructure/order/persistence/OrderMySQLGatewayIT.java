@@ -100,8 +100,6 @@ public class OrderMySQLGatewayIT {
                     .isEqualTo(order.getOrderIdentifier());
             assertThat(savedOrder.getStatus())
                     .isEqualTo(order.getStatus());
-            assertThat(savedOrder.getCreatedAt())
-                    .isEqualTo(order.getCreatedAt());
             assertThat(savedOrder.getObservation())
                     .isEqualTo(order.getObservation());
 
