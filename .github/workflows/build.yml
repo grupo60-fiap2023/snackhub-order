@@ -58,16 +58,21 @@ jobs:
           ./gradlew :domain:jacocoTestReport
           ./gradlew :application:jacocoTestReport
           ./gradlew :infrastructure:jacocoTestReport
-          
-          mkdir -p $GITHUB_WORKSPACE/combined-report
 
-          # Copie os relatórios para o diretório combinado
-          cp -r domain/build/reports/jacoco/test $GITHUB_WORKSPACE/combined-report/domain
-          cp -r application/build/reports/jacoco/test $GITHUB_WORKSPACE/combined-report/application
-          cp -r infrastructure/build/reports/jacoco/test $GITHUB_WORKSPACE/combined-report/infrastructure
-
-      - name: Upload Combined Report 📓
+      - name: Upload domain Report 📓
         uses: actions/upload-artifact@v2
         with:
           name: combined-report
-          path: ${{ github.workspace }}/combined-report
+          path: ${{ github.workspace }}/domain/build/reports/jacoco/test/
+
+      - name: Upload application Report 📓
+        uses: actions/upload-artifact@v2
+        with:
+          name: combined-report
+          path: ${{ github.workspace }}/application/build/reports/jacoco/test/
+
+      - name: Upload infrastructure Report 📓
+        uses: actions/upload-artifact@v2
+        with:
+          name: combined-report
+          path: ${{ github.workspace }}/infrastructure/build/reports/jacoco/test/
