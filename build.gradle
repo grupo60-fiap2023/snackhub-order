@@ -16,6 +16,12 @@ allprojects {
 
 subprojects {
     apply plugin: 'java'
+    apply plugin: 'jacoco'
+
+    tasks.withType(Test) {
+        jacoco.includeNoLocationClasses = true
+        jacoco.excludes = ['jdk.internal.*']
+    }
 
     tasks.create(name: "testCoverage", type: JacocoReport, dependsOn: "test") {
         group = "Reporting"
@@ -25,33 +31,5 @@ subprojects {
             html.required.set(true)
             xml.required.set(true)
         }
-
-        def excludes = [
-                '**/*Test*.*',
-                '**/actions/*.*',
-                '**/core/*.*',
-                '**/markers/*.*',
-                '**/services/**/*.*',
-                '**/toolwindow/*.*',
-                '**/utils/*.*'
-        ]
-
-        def javaDomainClasses = fileTree(dir: "${buildDir}/domain/classes/java/main", excludes: excludes)
-        def javaAppClasses = fileTree(dir: "${buildDir}/application/classes/java/main", excludes: excludes)
-        def javaInfraClasses = fileTree(dir: "${buildDir}/infrastructure/classes/java/main", excludes: excludes)
-        classDirectories.from = files([javaDomainClasses, javaAppClasses, javaInfraClasses])
-
-        sourceDirectories.from = files([
-                "$project.projectDir/domain/src/main/java",
-                "$project.projectDir/application/src/main/java",
-                "$project.projectDir/infrastructure/src/main/java",
-                "$buildDir/generated/source/kapt/test"
-        ])
-
-        executionData.from = files([
-                "${project.buildDir}/domain/test.exec",
-                "${project.buildDir}/application/test.exec",
-                "${project.buildDir}/infrastructure/test.exec"
-        ])
     }
 }
