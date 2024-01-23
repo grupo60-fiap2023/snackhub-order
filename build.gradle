@@ -1,7 +1,11 @@
-subprojects {
-    apply plugin: 'java'
+allprojects {
+    apply plugin: 'org.sonarqube'
 
-    test {
-        // Configurações de teste comuns, se necessário
+    sonarqube {
+        properties {
+            property 'sonar.projectKey', 'grupo60-fiap2023_snackhub'
+            property 'sonar.organization', 'grupo60-fiap2023'
+            property 'sonar.host.url', 'https://sonarcloud.io'
+        }
     }
 }
