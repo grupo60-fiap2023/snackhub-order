@@ -13,3 +13,17 @@ allprojects {
         }
     }
 }
+
+subprojects {
+    apply plugin: 'java'
+
+    tasks.create(name: "testCoverage", type: JacocoReport, dependsOn: "test") {
+        group = "Reporting"
+        description = "Generate Jacoco coverage reports for the test build."
+
+        reports {
+            html.required.set(true)
+            xml.required.set(true)
+        }
+    }
+}
