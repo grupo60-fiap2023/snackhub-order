@@ -59,15 +59,12 @@ jobs:
           ./gradlew :application:jacocoTestReport
           ./gradlew :infrastructure:jacocoTestReport
           
-          # Upload dos relatórios
-          for subprojeto in domain application infrastructure; do
-            path="$GITHUB_WORKSPACE/$subprojeto/build/reports/jacoco/test/jacocoTestReport.xml"
-            echo "Uploading coverage report for $subprojeto"
-            echo "Report path: $path"
-            echo "::set-output name=report-path::$path"
-            echo "::set-output name=report-name::$subprojeto-coverage.xml"
-          done
-        shell: bash
+          mkdir -p $GITHUB_WORKSPACE/combined-report
+
+          # Copie os relatórios para o diretório combinado
+          cp -r :domain/build/reports/jacoco/test $GITHUB_WORKSPACE/combined-report/domain
+          cp -r :application/build/reports/jacoco/test $GITHUB_WORKSPACE/combined-report/application
+          cp -r :infrastructure/build/reports/jacoco/test $GITHUB_WORKSPACE/combined-report/infrastructure
 
       - name: Upload Combined Report 📓
         uses: actions/upload-artifact@v2
