@@ -62,9 +62,9 @@ jobs:
           mkdir -p $GITHUB_WORKSPACE/combined-report
 
           # Copie os relatórios para o diretório combinado
-          cp -r :domain/build/reports/jacoco/test $GITHUB_WORKSPACE/combined-report/domain
-          cp -r :application/build/reports/jacoco/test $GITHUB_WORKSPACE/combined-report/application
-          cp -r :infrastructure/build/reports/jacoco/test $GITHUB_WORKSPACE/combined-report/infrastructure
+          cp -r domain/build/reports/jacoco/test $GITHUB_WORKSPACE/combined-report/domain
+          cp -r application/build/reports/jacoco/test $GITHUB_WORKSPACE/combined-report/application
+          cp -r infrastructure/build/reports/jacoco/test $GITHUB_WORKSPACE/combined-report/infrastructure
 
       - name: Upload Combined Report 📓
         uses: actions/upload-artifact@v2
