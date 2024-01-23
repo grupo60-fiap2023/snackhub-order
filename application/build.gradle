@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'jacoco'
 }
 
 jacoco {
@@ -13,8 +14,8 @@ tasks.withType(Test) {
 
 jacocoTestReport {
     reports {
-        xml.enabled true
-        html.enabled true
+        html.required.set(true)
+        xml.required.set(true)
     }
 }
 
