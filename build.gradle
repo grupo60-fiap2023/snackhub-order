@@ -33,4 +33,14 @@ subprojects {
             xml.required.set(true)
         }
     }
+
+    jacocoTestCoverageVerification {
+        violationRules {
+            rule {
+                limit {
+                    minimum = 0.98
+                }
+            }
+        }
+    }
 }
