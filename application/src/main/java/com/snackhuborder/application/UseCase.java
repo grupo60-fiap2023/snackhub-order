@@ -1,6 +1,6 @@
 package com.snackhuborder.application;
 
-public abstract class UseCase<InputType, OutputType> {
+public abstract class UseCase<I, O> {
 
-    public abstract OutputType execute(InputType inputObject);
+    public abstract O execute(I inputObject);
 }
