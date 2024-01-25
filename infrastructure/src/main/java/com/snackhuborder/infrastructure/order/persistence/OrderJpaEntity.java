@@ -79,7 +79,7 @@ public class OrderJpaEntity {
                 order.getStatus(),
                 order.getCreatedAt());
 
-        order.getItems().stream().map(orderItem -> OrderItemJpaEntity.create(orderItem)).forEach(orderJpaEntity.getItems()::add);
+        order.getItems().stream().map(OrderItemJpaEntity::create).forEach(orderJpaEntity.getItems()::add);
 
         return orderJpaEntity;
     }
@@ -94,7 +94,7 @@ public class OrderJpaEntity {
                 order.getStatus(),
                 order.getCreatedAt());
 
-        order.getItems().stream().map(orderItem -> OrderItemJpaEntity.from(orderItem)).forEach(orderJpaEntity.getItems()::add);
+        order.getItems().stream().map(OrderItemJpaEntity::from).forEach(orderJpaEntity.getItems()::add);
 
         return orderJpaEntity;
     }

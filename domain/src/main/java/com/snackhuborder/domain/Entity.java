@@ -1,10 +1,7 @@
 package com.snackhuborder.domain;
 
 
-
 import com.snackhuborder.domain.validation.ValidationHandler;
-
-import java.util.Objects;
 
 public abstract class Entity<ID extends Identifier> {
 

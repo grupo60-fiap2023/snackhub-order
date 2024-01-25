@@ -36,7 +36,7 @@ public class CreateOrderUseCase extends UseCase<CreateOrderCommand, OrderOutput>
     private List<OrderItem> getOrderItemsValid(CreateOrderCommand command, Notification notification) {
         List<CreateOrderItemCommand> items = command.items();
         if(Objects.isNull(items)){
-            return new ArrayList<OrderItem>();
+            return new ArrayList<>();
         }
 
         List<OrderItem> orderItems = new ArrayList<>();

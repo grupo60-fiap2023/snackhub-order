@@ -13,7 +13,7 @@ public interface OrderItemApiPresenter {
 
     static List<CreateOrderItemCommand> present(List<OrderItemRequest> itemsRequest) {
         if(Objects.isNull(itemsRequest)){
-            return new ArrayList<CreateOrderItemCommand>();
+            return new ArrayList<>();
         }
 
         return itemsRequest.stream().map(
