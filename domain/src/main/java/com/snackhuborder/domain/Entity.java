@@ -3,17 +3,17 @@ package com.snackhuborder.domain;
 
 import com.snackhuborder.domain.validation.ValidationHandler;
 
-public abstract class Entity<ID extends Identifier> {
+public abstract class Entity<IdentifierType  extends Identifier> {
 
-    protected final ID id;
+    protected final IdentifierType  id;
 
-    protected Entity(final ID id) {
+    protected Entity(final IdentifierType  id) {
         this.id = id;
     }
 
     public abstract void validate(ValidationHandler handler);
 
-    public ID getId() {
+    public IdentifierType  getId() {
         return id;
     }
 }

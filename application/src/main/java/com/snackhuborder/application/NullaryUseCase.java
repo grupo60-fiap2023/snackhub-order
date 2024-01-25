@@ -1,6 +1,6 @@
 package com.snackhuborder.application;
 
-public abstract class NullaryUseCase<OUT> {
+public abstract class NullaryUseCase<OutputType> {
 
-    public abstract OUT execute();
+    public abstract OutputType execute();
 }
