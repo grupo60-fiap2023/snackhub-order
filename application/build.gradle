@@ -1,27 +1,5 @@
 plugins {
     id 'java'
-    id 'jacoco'
-}
-
-jacoco {
-    toolVersion = '0.8.10'
-}
-
-tasks.withType(Test) {
-    jacoco.includeNoLocationClasses = true
-    jacoco.excludes = ['jdk.internal.*']
-}
-
-jacocoTestReport {
-    reports {
-        html.required.set(true)
-        xml.required.set(true)
-    }
-}
-
-subprojects {
-    sonarqube.dependsOn jacocoTestReport
-    property 'sonar.java.coveragePlugin', 'jacoco'
 }
 
 group = 'com.snackhuborder.application'
