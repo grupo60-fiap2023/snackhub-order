@@ -23,7 +23,7 @@ subprojects {
     sonarqube.dependsOn jacocoTestReport
     property 'sonar.java.coveragePlugin', 'jacoco'
     property 'sonar.junit.reportPaths', 'build/test-results/test'
-    property 'sonar.coverage.jacoco.xmlReportPaths', 'build/reports/jacoco/test/jacocoTestReport.xml'
+    property 'sonar.coverage.jacoco.xmlReportPaths', '/home/runner/work/snackhub-order/snackhub-order/domain/build/reports/jacoco/test/jacocoTestReport.xml'
 }
 
 group = 'com.snackhuborder.domain'
