@@ -48,7 +48,6 @@ public class EntityTest {
 
         OrderItemId id = OrderItemId.from(1L);
         OrderItem firstOrderItem = OrderItem.with(id, expectedName, expectedPrice, expectedQuantity, expectedCategory);
-
-        Assertions.assertNotNull(firstOrderItem.hashCode());
+        Assertions.assertEquals(firstOrderItem.hashCode(), firstOrderItem.hashCode());
     }
 }
