@@ -22,7 +22,7 @@ class OrderTest {
     }
 
     @Test
-    public void givenAValidParams_whenCallNewOrder_thenInstantiateAOrder() {
+    void givenAValidParams_whenCallNewOrder_thenInstantiateAOrder() {
         final var expectedCustomerId = 11l;
         OrderItem item = getOrderItemMock();
         final Order order = Order.newOrder(Arrays.asList(item), expectedCustomerId, "Maria",null);
@@ -42,7 +42,7 @@ class OrderTest {
     }
 
     @Test
-    public void givenAValidParams_whenCallWithOrder_thenInstantiateAOrder() {
+    void givenAValidParams_whenCallWithOrder_thenInstantiateAOrder() {
         final var expectedCustomerId = 11l;
         OrderItem item = getOrderItemMock();
         String observation = "Sem molho";
@@ -64,7 +64,7 @@ class OrderTest {
     }
 
     @Test
-    public void givenAInvalidObservation_whenCallNewOrdertAndValidate_thenShouldReceiveError() {
+    void givenAInvalidObservation_whenCallNewOrdertAndValidate_thenShouldReceiveError() {
         final String expectedObservation = """
                 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
                 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -88,7 +88,7 @@ class OrderTest {
     }
 
     @Test
-    public void givenAInvalidOrderItems_whenCallNewOrdertAndValidate_thenShouldReceiveError() {
+    void givenAInvalidOrderItems_whenCallNewOrdertAndValidate_thenShouldReceiveError() {
         final var expectedErrorCount = 1;
         final var expectedErrorMessage = "The order is necessary almost one item";
 
@@ -104,7 +104,7 @@ class OrderTest {
     }
 
     @Test
-    public void givenAInvalidEmptyOrderItems_whenCallNewOrdertAndValidate_thenShouldReceiveError() {
+    void givenAInvalidEmptyOrderItems_whenCallNewOrdertAndValidate_thenShouldReceiveError() {
         final var expectedErrorCount = 1;
         final var expectedErrorMessage = "The order is necessary almost one item";
 
@@ -120,7 +120,7 @@ class OrderTest {
     }
 
     @Test
-    public void givenAValidStatus_whenCallChangeStatus_thenChangeToNewState() {
+    void givenAValidStatus_whenCallChangeStatus_thenChangeToNewState() {
         final var expectedCustomerId = 11l;
         OrderItem item = getOrderItemMock();
         final Order order = Order.newOrder(Arrays.asList(item), expectedCustomerId, "Maria",null);
@@ -130,7 +130,7 @@ class OrderTest {
     }
 
     @Test
-    public void givenAInvalidOrderIdentifier_whenCallNewOrdertAndValidate_thenShouldReceiveError() {
+    void givenAInvalidOrderIdentifier_whenCallNewOrdertAndValidate_thenShouldReceiveError() {
         final String expectedOrderIdentifier = """
                 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
                 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -154,7 +154,7 @@ class OrderTest {
     }
 
     @Test
-    public void givenANulldOrderIdentifier_whenCallNewOrdertAndValidate_thenShouldReceiveError() {
+    void givenANulldOrderIdentifier_whenCallNewOrdertAndValidate_thenShouldReceiveError() {
         final var expectedErrorCount = 1;
         final var expectedErrorMessage = "'orderIdentifier' is required";
 
@@ -171,7 +171,7 @@ class OrderTest {
     }
 
     @Test
-    public void givenAEmptyOrderIdentifier_whenCallNewOrdertAndValidate_thenShouldReceiveError() {
+    void givenAEmptyOrderIdentifier_whenCallNewOrdertAndValidate_thenShouldReceiveError() {
         final var expectedErrorCount = 1;
         final var expectedErrorMessage = "'orderIdentifier' is required";
 

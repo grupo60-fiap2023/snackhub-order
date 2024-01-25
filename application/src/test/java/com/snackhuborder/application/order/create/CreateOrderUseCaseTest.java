@@ -40,7 +40,7 @@ class CreateOrderUseCaseTest {
     }
 
     @Test
-    public void givenAValidCommand_whenUseCase_thenReturnOutput() {
+    void givenAValidCommand_whenUseCase_thenReturnOutput() {
         CreateOrderItemCommand firstItemCommand = CreateOrderItemCommand.with(
                 "Snack", BigDecimal.TEN, 2, OrderItemCategory.SNACK);
         CreateOrderItemCommand secondItemCommand = CreateOrderItemCommand.with(
@@ -64,7 +64,7 @@ class CreateOrderUseCaseTest {
     }
 
     @Test
-    public void givenAInvalidCommand_whenUseCase_thenErro() {
+    void givenAInvalidCommand_whenUseCase_thenErro() {
         when(this.orderGateway.save(any(Order.class)))
                 .thenAnswer(i -> i.getArgument(0));
 

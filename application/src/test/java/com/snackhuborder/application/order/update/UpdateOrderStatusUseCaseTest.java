@@ -39,7 +39,7 @@ class UpdateOrderStatusUseCaseTest {
     }
 
     @Test
-    public void givenAValidCommand_whenCallUseCase_thenReturnOutput() {
+    void givenAValidCommand_whenCallUseCase_thenReturnOutput() {
         OrderItem orderItem = OrderItem.with(OrderItemId.from(1L), "Snack", BigDecimal.TEN, 2, OrderItemCategory.SNACK);
         final var expectedCustomerId = 11l;
         Order order = Order.with(OrderId.from(1L), Arrays.asList(orderItem), expectedCustomerId, "Maria",null, OrderStatus.RECEIVED, Instant.now());
@@ -63,7 +63,7 @@ class UpdateOrderStatusUseCaseTest {
     }
 
     @Test
-    public void givenAOrderCommand_whenCallUseCase_thenReturnNotFindOrder() {
+    void givenAOrderCommand_whenCallUseCase_thenReturnNotFindOrder() {
         when(this.orderGateway.findOrderById(any(OrderId.class)))
                 .thenReturn(Optional.empty());
 

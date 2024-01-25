@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 class EntityTest {
 
     @Test
-    public void givenASameEntity_whenEquals_thenReturnTrue() {
+    void givenASameEntity_whenEquals_thenReturnTrue() {
         final var expectedName = "Big Mac";
         final var expectedPrice = BigDecimal.valueOf(25.0);
         final var expectedCategory = OrderItemCategory.SNACK;
@@ -20,11 +20,11 @@ class EntityTest {
         OrderItem firstOrderItem = OrderItem.with(id, expectedName, expectedPrice, expectedQuantity, expectedCategory);
 
         OrderItem secondOrderItem = firstOrderItem;
-        Assertions.assertTrue(firstOrderItem.equals(secondOrderItem));
+        Assertions.assertEquals(firstOrderItem, secondOrderItem);
     }
 
     @Test
-    public void givenADiferentEntity_whenEquals_thenReturnFalse() {
+    void givenADiferentEntity_whenEquals_thenReturnFalse() {
         final var expectedName = "Big Mac";
         final var expectedPrice = BigDecimal.valueOf(25.0);
         final var expectedCategory = OrderItemCategory.SNACK;
@@ -36,11 +36,11 @@ class EntityTest {
         OrderItemId secondId = OrderItemId.from(1L);
         OrderItem secondOrderItem = OrderItem.with(secondId, expectedName, expectedPrice, expectedQuantity, expectedCategory);
 
-        Assertions.assertFalse(firstOrderItem.equals(secondOrderItem));
+        Assertions.assertNotEquals(firstOrderItem, secondOrderItem);
     }
 
     @Test
-    public void givenAEntity_whenCallHash_thenReturnHashNotNull() {
+    void givenAEntity_whenCallHash_thenReturnHashNotNull() {
         final var expectedName = "Big Mac";
         final var expectedPrice = BigDecimal.valueOf(25.0);
         final var expectedCategory = OrderItemCategory.SNACK;

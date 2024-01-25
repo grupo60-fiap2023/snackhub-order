@@ -10,7 +10,7 @@ import java.util.List;
 class DomainExceptionTest {
 
     @Test
-    public void givenException_whenCallValidation_thenFillDomainException(){
+    void givenException_whenCallValidation_thenFillDomainException(){
         Error error = new Error("Mensagem");
         DomainException domainException = DomainException.with(error);
         Assertions.assertNotNull(domainException.getErrors());
@@ -20,7 +20,7 @@ class DomainExceptionTest {
     }
 
     @Test
-    public void givenListException_whenCallValidation_thenFillDomainException(){
+    void givenListException_whenCallValidation_thenFillDomainException(){
         Error error = new Error("Mensagem");
         DomainException domainException = DomainException.with(Arrays.asList(error));
         Assertions.assertNotNull(domainException.getErrors());

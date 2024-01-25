@@ -1,4 +1,6 @@
 package com.snackhuborder.domain.validation;
 
-public record Error(String message) {
+import java.io.Serializable;
+
+public record Error(String message) implements Serializable {
 }

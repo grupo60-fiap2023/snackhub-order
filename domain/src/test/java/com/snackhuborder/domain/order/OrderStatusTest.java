@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 class OrderStatusTest {
 
     @Test
-    public void givenAReceivedStatus_whenCallStatusName_thenReturnNameFilled() {
+    void givenAReceivedStatus_whenCallStatusName_thenReturnNameFilled() {
         OrderStatus received = OrderStatus.RECEIVED;
         Assertions.assertNotNull(received.getName());
         Assertions.assertEquals("Recebido", received.getName());
@@ -15,7 +15,7 @@ class OrderStatusTest {
     }
 
     @Test
-    public void givenAInPreparationStatus_whenCallStatusName_thenReturnNameFilled() {
+    void givenAInPreparationStatus_whenCallStatusName_thenReturnNameFilled() {
         OrderStatus inPreparation = OrderStatus.IN_PREPARATION;
         Assertions.assertNotNull(inPreparation.getName());
         Assertions.assertEquals("Em preparacao", inPreparation.getName());
@@ -23,7 +23,7 @@ class OrderStatusTest {
     }
 
     @Test
-    public void givenAReadyStatus_whenCallStatusName_thenReturnNameFilled() {
+    void givenAReadyStatus_whenCallStatusName_thenReturnNameFilled() {
         OrderStatus ready = OrderStatus.READY;
         Assertions.assertNotNull(ready.getName());
         Assertions.assertEquals("Pronto", ready.getName());
@@ -31,7 +31,7 @@ class OrderStatusTest {
     }
 
     @Test
-    public void givenAFinishedStatus_whenCallStatusName_thenReturnNameFilled() {
+    void givenAFinishedStatus_whenCallStatusName_thenReturnNameFilled() {
         OrderStatus finished = OrderStatus.FINISHED;
         Assertions.assertNotNull(finished.getName());
         Assertions.assertEquals("Finalizado", finished.getName());

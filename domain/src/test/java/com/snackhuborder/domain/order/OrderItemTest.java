@@ -14,7 +14,7 @@ class OrderItemTest {
     public static final String SNACK_NAME = "Hamburguer";
 
     @Test
-    public void givenAValidParams_whenCallWithOrderItem_thenInstantiateAOrder() {
+    void givenAValidParams_whenCallWithOrderItem_thenInstantiateAOrder() {
         final var expectedName = SNACK_NAME;
         final var expectedPrice = BigDecimal.TEN;
         final var expectedCategory = OrderItemCategory.SNACK;
@@ -33,7 +33,7 @@ class OrderItemTest {
     }
 
     @Test
-    public void givenAValidParams_whenCallNewOrderItem_thenInstantiateAOrder() {
+    void givenAValidParams_whenCallNewOrderItem_thenInstantiateAOrder() {
         final var expectedName = SNACK_NAME;
         final var expectedPrice = BigDecimal.TEN;
         final var expectedCategory = OrderItemCategory.SNACK;
@@ -50,7 +50,7 @@ class OrderItemTest {
     }
 
     @Test
-    public void givenZeroQuantity_whenCallNewOrderItem_thenReturnError() {
+    void givenZeroQuantity_whenCallNewOrderItem_thenReturnError() {
         final var expectedErrorCount = 1;
         final var expectedErrorMessage = "'quantity' must be greater than zero";
 
@@ -68,7 +68,7 @@ class OrderItemTest {
     }
 
     @Test
-    public void givenInvalidQuantity_whenCallNewOrderItem_thenReturnError() {
+    void givenInvalidQuantity_whenCallNewOrderItem_thenReturnError() {
         final var expectedErrorCount = 1;
         final var expectedErrorMessage = "'quantity' must be greater than zero";
 
@@ -86,7 +86,7 @@ class OrderItemTest {
     }
 
     @Test
-    public void givenANegativeQuantity_whenCallNewOrderItem_thenReturnError() {
+    void givenANegativeQuantity_whenCallNewOrderItem_thenReturnError() {
         final var expectedErrorCount = 1;
         final var expectedErrorMessage = "'quantity' must be greater than zero";
 
@@ -104,7 +104,7 @@ class OrderItemTest {
     }
 
     @Test
-    public void givenANegativePrice_whenCallWithOrderItem_thenReturnError() {
+    void givenANegativePrice_whenCallWithOrderItem_thenReturnError() {
         final var expectedErrorCount = 1;
         final var expectedErrorMessage = "'price' should not be negative";
 
@@ -123,7 +123,7 @@ class OrderItemTest {
     }
 
     @Test
-    public void givenANullCategory_whenCallWithOrderItem_thenReturnError() {
+    void givenANullCategory_whenCallWithOrderItem_thenReturnError() {
         final var expectedErrorCount = 1;
         final var expectedErrorMessage = "'category' is required";
 
@@ -140,7 +140,7 @@ class OrderItemTest {
         Assertions.assertEquals(expectedErrorMessage, notification.getErrors().stream().findFirst().get().message());
     }
     @Test
-    public void givenANullPrice_whenCallWithOrderItem_thenReturnError() {
+    void givenANullPrice_whenCallWithOrderItem_thenReturnError() {
         final var expectedErrorCount = 1;
         final var expectedErrorMessage = "'price' is required";
 
@@ -158,7 +158,7 @@ class OrderItemTest {
     }
 
     @Test
-    public void givenANullName_whenCallWithOrderItem_thenReturnError() {
+    void givenANullName_whenCallWithOrderItem_thenReturnError() {
         final var expectedErrorCount = 1;
         final var expectedErrorMessage = "'name' is required";
 
@@ -176,7 +176,7 @@ class OrderItemTest {
     }
 
     @Test
-    public void givenABlankName_whenCallWithOrderItem_thenReturnError() {
+    void givenABlankName_whenCallWithOrderItem_thenReturnError() {
         final var expectedErrorCount = 1;
         final var expectedErrorMessage = "'name' should not be empty";
 
@@ -194,7 +194,7 @@ class OrderItemTest {
     }
 
     @Test
-    public void givenAInvalidNameMore255Chars_whenCallWithOrderItem_thenReturnError() {
+    void givenAInvalidNameMore255Chars_whenCallWithOrderItem_thenReturnError() {
         final var expectedErrorCount = 1;
         final var expectedErrorMessage = "'name' must be between 3 and 255 characters";
 
@@ -218,7 +218,7 @@ class OrderItemTest {
     }
 
     @Test
-    public void givenAInvalidNameLess3Chars_whenCallWithOrderItem_thenReturnError() {
+    void givenAInvalidNameLess3Chars_whenCallWithOrderItem_thenReturnError() {
         final var expectedErrorCount = 1;
         final var expectedErrorMessage = "'name' must be between 3 and 255 characters";
 
