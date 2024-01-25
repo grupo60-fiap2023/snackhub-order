@@ -43,9 +43,6 @@ subprojects {
         useJUnitPlatform()
     }
 
-    sonarqube.dependsOn jacocoTestReport
-    property 'sonar.java.coveragePlugin', 'jacoco'
-
     jacocoTestCoverageVerification {
         violationRules {
             rule {
