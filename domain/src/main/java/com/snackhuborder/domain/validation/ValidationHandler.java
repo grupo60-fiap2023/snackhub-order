@@ -13,11 +13,10 @@ public interface ValidationHandler {
     }
 
     default Error firstError() {
-        if (getErrors() != null && !getErrors().isEmpty()) {
-            return getErrors().stream().findFirst().get();
-        } else {
-            return null;
-        }
+        return getErrors()
+                .stream()
+                .findFirst()
+                .orElse(null);
     }
 
     interface Validation<T> {
