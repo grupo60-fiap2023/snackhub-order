@@ -17,7 +17,7 @@ import java.util.List;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-public class FindOrdersByStatusUseCaseTest {
+class FindOrdersByStatusUseCaseTest {
 
     private FindOrdersByStatusUseCase useCase;
 

@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 
-public class OrderItemCategoryTest {
+class OrderItemCategoryTest {
 
     @Test
     public void givenAValidSnackCategory_whenCallNameCateroy_thenReturnNameFilled() {

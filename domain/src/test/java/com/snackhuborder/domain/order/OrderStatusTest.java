@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 
-public class OrderStatusTest {
+class OrderStatusTest {
 
     @Test
     public void givenAReceivedStatus_whenCallStatusName_thenReturnNameFilled() {

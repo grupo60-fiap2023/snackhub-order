@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 
 
-public class EntityTest {
+class EntityTest {
 
     @Test
     public void givenASameEntity_whenEquals_thenReturnTrue() {

@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 
-public class OrderItemTest {
+class OrderItemTest {
 
     public static final long ONE_ID = 1l;
     public static final int TWO_QUANTITY = 2;

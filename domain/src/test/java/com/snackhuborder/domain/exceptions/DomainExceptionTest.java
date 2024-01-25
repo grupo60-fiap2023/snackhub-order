@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
-public class DomainExceptionTest {
+class DomainExceptionTest {
 
     @Test
     public void givenException_whenCallValidation_thenFillDomainException(){

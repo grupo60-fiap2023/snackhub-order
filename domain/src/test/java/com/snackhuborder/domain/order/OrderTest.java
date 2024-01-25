@@ -10,7 +10,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class OrderTest {
+class OrderTest {
 
     private OrderItem getOrderItemMock(){
         final var expectedName = "Big Mac";

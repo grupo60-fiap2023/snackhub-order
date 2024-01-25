@@ -19,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 @AutoConfigureTestDatabase
 @Transactional
-public class OrderMySQLGatewayIT {
+class OrderMySQLGatewayIT {
 
     @Autowired
     private OrderMySQLGateway orderMySQLGateway;

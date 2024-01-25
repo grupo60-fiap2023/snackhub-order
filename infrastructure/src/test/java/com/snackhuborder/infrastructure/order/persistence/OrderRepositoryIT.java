@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 @AutoConfigureTestDatabase
 @Transactional
-public class OrderRepositoryIT {
+class OrderRepositoryIT {
 
     @Autowired
     private OrderRepository orderRepository;
