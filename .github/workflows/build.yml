@@ -41,7 +41,46 @@ jobs:
         uses: madrapps/jacoco-report@v1.6.1
         with:
           paths: ${{ github.workspace }}/build/jacoco/test.exe
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.REPO_TOKEN }}
           min-coverage-overall: 85
           min-coverage-changed-files: 70
-          debug-mode: true
+          debug-mode: false
+
+  deploy:
+    name: Deploy AWS
+    runs-on: ubuntu-latest
+    needs: code-analisys
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 17 🔧
+        uses: actions/setup-java@v1
+        with:
+          java-version: 17
+      - name: Change wrapper permissions 🛡️
+        run: chmod +x gradlew
+      - name: Build and analyze 🔍
+        env:
+          GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: ./gradlew build
+      - name: Configure AWS credentials 🔑
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-region: us-east-1
+          aws-access-key-id: ${{ secrets.TF_VAR_AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.TF_VAR_AWS_SECRET_KEY }}
+
+      - name: Login to Amazon ECR Private 🔑🚪
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build, tag, and push docker image to Amazon ECR 🏗️
+        env:
+          REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          REPOSITORY: ecr_repository
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          docker login -u AWS -p $(aws ecr get-login-password --region us-east-1) ${{ env.REGISTRY }}
+          docker build -t ${{ env.REGISTRY }}/${{ env.REPOSITORY }}:snackhub_order_${{ env.IMAGE_TAG }} -t ${{ env.REGISTRY }}/${{ env.REPOSITORY }}:snackhub_order_latest . -f Dockerfile
+          docker push ${{ env.REGISTRY }}/${{ env.REPOSITORY }}:snackhub_order_${{ env.IMAGE_TAG }}
+          docker push ${{ env.REGISTRY }}/${{ env.REPOSITORY }}:snackhub_order_latest
