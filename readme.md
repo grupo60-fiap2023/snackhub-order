@@ -78,7 +78,6 @@ O nosso serviço também tem uma configuração no qual a pipeline irá falhar c
 
 ![img.png](readmefiles/configcoverage.png)
 
-![img.png](readmefiles/configcoverage2.png)
 
 ## Tipos de Testes Implementados
 ## Teste de unidade
