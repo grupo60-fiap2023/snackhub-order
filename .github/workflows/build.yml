@@ -36,6 +36,15 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: ./gradlew build jacocoTestReport jacocoTestCoverageVerification sonar --info
+      - name: Jacoco Report to PR
+        id: jacoco
+        uses: madrapps/jacoco-report@v1.6.1
+        with:
+          paths: ${{ github.workspace }}/build/jacoco/test.exe
+          min-coverage-overall: 85
+          min-coverage-changed-files: 70
+          debug-mode: false
+
   deploy:
     name: Deploy AWS
     runs-on: ubuntu-latest
@@ -50,7 +59,6 @@ jobs:
         run: chmod +x gradlew
       - name: Build and analyze 🔍
         env:
-          GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: ./gradlew build
       - name: Configure AWS credentials 🔑
