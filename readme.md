@@ -137,6 +137,12 @@ http://localhost:8080/swagger-ui/index.html#
 # Step Deploy
 O último step da pipeline realiza de forma automatizada o deploy para a AWS.
 
+![img.png](readmefiles/deployaws.png)
+
+Serviço no ar:
+
+![img.png](readmefiles/service.png)
+
 # Proteção Repositório
 ![img.png](readmefiles/github1.png)
 
