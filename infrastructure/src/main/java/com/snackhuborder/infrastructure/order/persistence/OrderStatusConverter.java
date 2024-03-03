@@ -2,7 +2,7 @@ package com.snackhuborder.infrastructure.order.persistence;
 
 import com.snackhuborder.domain.order.OrderStatus;
 
-import javax.persistence.AttributeConverter;
+import jakarta.persistence.AttributeConverter;
 import java.util.stream.Stream;
 
 public class OrderStatusConverter implements AttributeConverter<OrderStatus, Integer> {

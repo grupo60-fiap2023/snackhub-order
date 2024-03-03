@@ -3,8 +3,9 @@ package com.snackhuborder.infrastructure.order.persistence;
 import com.snackhuborder.domain.order.Order;
 import com.snackhuborder.domain.order.OrderId;
 import com.snackhuborder.domain.order.OrderStatus;
+import jakarta.persistence.Entity;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;

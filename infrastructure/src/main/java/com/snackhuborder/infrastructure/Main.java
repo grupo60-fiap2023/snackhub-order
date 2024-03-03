@@ -16,7 +16,7 @@ import org.springframework.core.env.AbstractEnvironment;
 @SecurityScheme(type = SecuritySchemeType.HTTP, name = "bearerAuth", in = SecuritySchemeIn.HEADER, bearerFormat = "JWT",
         scheme = "bearer")
 @SpringBootApplication
-public class Main {
+public class Main{
     public static void main(String[] args) {
         System.setProperty(AbstractEnvironment.DEFAULT_PROFILES_PROPERTY_NAME, "development");
         SpringApplication.run(WebServerConfig.class, args);

@@ -6,10 +6,12 @@ import com.snackhuborder.domain.order.OrderId;
 import com.snackhuborder.domain.order.OrderStatus;
 import com.snackhuborder.infrastructure.order.persistence.OrderJpaEntity;
 import com.snackhuborder.infrastructure.order.persistence.OrderRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Component;
 
-import javax.transaction.Transactional;
+
+
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;

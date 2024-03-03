@@ -5,7 +5,7 @@ import com.snackhuborder.domain.order.OrderItem;
 import com.snackhuborder.domain.order.OrderItemCategory;
 import com.snackhuborder.domain.order.OrderItemId;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.math.BigDecimal;
 
 @Entity(name = "OrderItem")
