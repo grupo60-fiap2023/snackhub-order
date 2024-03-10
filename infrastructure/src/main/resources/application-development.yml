@@ -14,6 +14,3 @@ server:
       worker: 10
       io: 2
 
-cloud:
-  sqs:
-    endpoint: http//localhost:4566

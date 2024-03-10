@@ -39,7 +39,7 @@ class UpdateOrderStatusUseCaseTest {
     }
 
     @Test
-    void givenAValidCommand_whenCallUseCase_thenReturnOutput() {
+    void givenAValidCommand_whenCallUseCase_thenReturnOutput() throws Exception {
         OrderItem orderItem = OrderItem.with(OrderItemId.from(1L), "Snack", BigDecimal.TEN, 2, OrderItemCategory.SNACK);
         final var expectedCustomerId = 11l;
         Order order = Order.with(OrderId.from(1L), Arrays.asList(orderItem), expectedCustomerId, "Maria",null, OrderStatus.RECEIVED, Instant.now());

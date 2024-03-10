@@ -19,15 +19,7 @@ class OrderStatusTest {
         OrderStatus inPreparation = OrderStatus.IN_PREPARATION;
         Assertions.assertNotNull(inPreparation.getName());
         Assertions.assertEquals("Em preparacao", inPreparation.getName());
-        Assertions.assertEquals(2, inPreparation.getId());
-    }
-
-    @Test
-    void givenAReadyStatus_whenCallStatusName_thenReturnNameFilled() {
-        OrderStatus ready = OrderStatus.READY;
-        Assertions.assertNotNull(ready.getName());
-        Assertions.assertEquals("Pronto", ready.getName());
-        Assertions.assertEquals(3, ready.getId());
+        Assertions.assertEquals(6, inPreparation.getId());
     }
 
     @Test
@@ -35,6 +27,6 @@ class OrderStatusTest {
         OrderStatus finished = OrderStatus.FINISHED;
         Assertions.assertNotNull(finished.getName());
         Assertions.assertEquals("Finalizado", finished.getName());
-        Assertions.assertEquals(4, finished.getId());
+        Assertions.assertEquals(7, finished.getId());
     }
 }

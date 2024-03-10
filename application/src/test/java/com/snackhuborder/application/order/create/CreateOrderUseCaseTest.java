@@ -40,13 +40,13 @@ class CreateOrderUseCaseTest {
     }
 
     @Test
-    void givenAValidCommand_whenUseCase_thenReturnOutput() {
+    void givenAValidCommand_whenUseCase_thenReturnOutput() throws Exception {
         CreateOrderItemCommand firstItemCommand = CreateOrderItemCommand.with(
                 "Snack", BigDecimal.TEN, 2, OrderItemCategory.SNACK);
         CreateOrderItemCommand secondItemCommand = CreateOrderItemCommand.with(
                 "Soda", BigDecimal.ONE, 1, OrderItemCategory.BEVERAGES);
 
-        when(this.orderGateway.save(any(Order.class)))
+        when(this.orderGateway.create(any(Order.class)))
                 .thenAnswer(i -> i.getArgument(0));
 
         final var expectedCustomerId = 11l;
@@ -64,8 +64,8 @@ class CreateOrderUseCaseTest {
     }
 
     @Test
-    void givenAInvalidCommand_whenUseCase_thenErro() {
-        when(this.orderGateway.save(any(Order.class)))
+    void givenAInvalidCommand_whenUseCase_thenErro() throws Exception {
+        when(this.orderGateway.create(any(Order.class)))
                 .thenAnswer(i -> i.getArgument(0));
 
         final var expectedCustomerId = 11l;

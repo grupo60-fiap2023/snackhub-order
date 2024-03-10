@@ -1,10 +1,10 @@
-package com.snackhuborder.infrastructure.order.consumer;
+package com.snackhuborder.infrastructure.queue.consumer;
 
 
 import com.snackhuborder.application.order.update.UpdateOrderStatusCommand;
 import com.snackhuborder.application.order.update.UpdateOrderStatusUseCase;
 import com.snackhuborder.domain.order.OrderStatus;
-import com.snackhuborder.infrastructure.order.models.UpdateStatusMessage;
+import com.snackhuborder.infrastructure.order.models.queue.UpdateStatusSchema;
 import io.awspring.cloud.sqs.annotation.SqsListener;
 import org.springframework.stereotype.Component;
 
@@ -18,13 +18,9 @@ public class OrderConsumer {
         this.updateOrderStatusUseCase = updateOrderStatusUseCase;
     }
 
-    @SqsListener("order-status")
-    public void listen(UpdateStatusMessage message){
-        try{
-            var command = UpdateOrderStatusCommand.with(message.id(), OrderStatus.valueOf(message.status()));
-            this.updateOrderStatusUseCase.execute(command);
-        }catch (Exception e){
-            //todo produzir para topico de deadletters
-        }
+    @SqsListener("order-status-topic")
+    public void listen(UpdateStatusSchema message) throws Exception {
+        var command = UpdateOrderStatusCommand.with(message.orderId(), OrderStatus.valueOf(message.status()));
+        this.updateOrderStatusUseCase.execute(command);
     }
 }

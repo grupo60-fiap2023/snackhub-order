@@ -12,6 +12,9 @@ server:
       io: 4 # One IO thread per CPU core is a reasonable default: https://undertow.io/undertow-docs/undertow-docs-2.1.0/index.html#listeners-2
 
 spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
   datasource:
     url: jdbc:mysql://${mysql.url}:${mysql.port}/${mysql.schema}?autoReconnect=true&useSSL=true&serverTimezone=UTC&characterEncoding=UTF-8
     username: ${mysql.username}
@@ -35,3 +38,10 @@ management:
   endpoint:
     health:
       show-details: always
+
+cloud:
+  sqs:
+    aws-region: sa-east-1
+    order: https://localhost.localstack.cloud:4566/000000000000/order-topic
+    order-successful: https://localhost.localstack.cloud:4566/000000000000/order-successful-topic
+    endpoint-listener: http://localhost:4566

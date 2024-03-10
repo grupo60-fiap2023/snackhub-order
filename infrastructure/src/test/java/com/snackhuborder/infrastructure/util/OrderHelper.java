@@ -1,8 +1,8 @@
 package com.snackhuborder.infrastructure.util;
 
 import com.snackhuborder.domain.order.*;
-import com.snackhuborder.infrastructure.order.models.CreateOrderRequest;
-import com.snackhuborder.infrastructure.order.models.OrderItemRequest;
+import com.snackhuborder.infrastructure.order.models.api.CreateOrderRequest;
+import com.snackhuborder.infrastructure.order.models.api.OrderItemRequest;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

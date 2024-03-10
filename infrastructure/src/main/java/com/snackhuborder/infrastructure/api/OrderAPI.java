@@ -1,9 +1,9 @@
 package com.snackhuborder.infrastructure.api;
 
 import com.snackhuborder.domain.order.OrderStatus;
-import com.snackhuborder.infrastructure.order.models.CreateOrderRequest;
-import com.snackhuborder.infrastructure.order.models.OrderResponse;
-import com.snackhuborder.infrastructure.order.models.UpdateStatusRequest;
+import com.snackhuborder.infrastructure.order.models.api.CreateOrderRequest;
+import com.snackhuborder.infrastructure.order.models.api.OrderResponse;
+import com.snackhuborder.infrastructure.order.models.api.UpdateStatusRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;

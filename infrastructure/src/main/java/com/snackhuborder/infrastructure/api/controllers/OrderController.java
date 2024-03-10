@@ -9,9 +9,9 @@ import com.snackhuborder.application.order.update.UpdateOrderStatusUseCase;
 import com.snackhuborder.domain.exceptions.DomainException;
 import com.snackhuborder.domain.order.OrderStatus;
 import com.snackhuborder.infrastructure.api.OrderAPI;
-import com.snackhuborder.infrastructure.order.models.CreateOrderRequest;
-import com.snackhuborder.infrastructure.order.models.OrderResponse;
-import com.snackhuborder.infrastructure.order.models.UpdateStatusRequest;
+import com.snackhuborder.infrastructure.order.models.api.CreateOrderRequest;
+import com.snackhuborder.infrastructure.order.models.api.OrderResponse;
+import com.snackhuborder.infrastructure.order.models.api.UpdateStatusRequest;
 import com.snackhuborder.infrastructure.order.presenters.OrderApiPresenter;
 import com.snackhuborder.infrastructure.order.presenters.OrderItemApiPresenter;
 import org.springframework.http.ResponseEntity;
@@ -48,6 +48,8 @@ public class OrderController implements OrderAPI {
             response = OrderApiPresenter.present(order);
         }catch (DomainException e){
             return ResponseEntity.unprocessableEntity().body(e.getErrors());
+        }catch (Exception e){
+            return ResponseEntity.unprocessableEntity().body(e.getMessage());
         }
 
         return ResponseEntity.created(URI.create("/orders" + response.id())).body(response);
@@ -68,10 +70,12 @@ public class OrderController implements OrderAPI {
         OrderResponse output;
         try{
             var command = UpdateOrderStatusCommand.with(id, request.status());
-            var order = this.updateOrderStatusUseCase.execute(command);
+             var order = this.updateOrderStatusUseCase.execute(command);
             output = OrderApiPresenter.present(order);
         }catch (DomainException e){
             return ResponseEntity.unprocessableEntity().body(e.getErrors());
+        }catch (Exception e){
+            return ResponseEntity.unprocessableEntity().body(e.getMessage());
         }
 
         return ResponseEntity.ok().body(output);

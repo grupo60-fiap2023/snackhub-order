@@ -2,8 +2,8 @@ package com.snackhuborder.infrastructure.order.presenters;
 
 import com.snackhuborder.application.order.OrderItemOutput;
 import com.snackhuborder.application.order.create.CreateOrderItemCommand;
-import com.snackhuborder.infrastructure.order.models.OrderItemRequest;
-import com.snackhuborder.infrastructure.order.models.OrderItemResponse;
+import com.snackhuborder.infrastructure.order.models.api.OrderItemRequest;
+import com.snackhuborder.infrastructure.order.models.api.OrderItemResponse;
 
 import java.util.ArrayList;
 import java.util.List;
