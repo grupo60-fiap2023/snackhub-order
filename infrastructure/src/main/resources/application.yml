@@ -38,10 +38,3 @@ management:
   endpoint:
     health:
       show-details: always
-
-cloud:
-  sqs:
-    aws-region: sa-east-1
-    order: https://localhost.localstack.cloud:4566/000000000000/order-topic
-    order-successful: https://localhost.localstack.cloud:4566/000000000000/order-successful-topic
-    endpoint-listener: http://localhost:4566
