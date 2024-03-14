@@ -20,5 +20,6 @@ server:
 #    aws-region: us-east-1
 #    order: https://sqs.us-east-1.amazonaws.com/622646576227/order-topic
 #    order-successful: https://sqs.us-east-1.amazonaws.com/622646576227/order-successful-topic
-#    endpoint-listener: https://sqs.us-east-1.amazonaws.com/622646576227/
 #    order-status: https://sqs.us-east-1.amazonaws.com/622646576227/order-status-topic
+#    accessKeyId: AKIAZB6FAYRRYC3XJMNT
+#    secretAccessKey: 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
