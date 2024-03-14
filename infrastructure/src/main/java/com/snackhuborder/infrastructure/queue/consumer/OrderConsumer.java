@@ -18,7 +18,7 @@ public class OrderConsumer {
         this.updateOrderStatusUseCase = updateOrderStatusUseCase;
     }
 
-    @SqsListener("order-status-topic")
+    @SqsListener("${cloud.sqs.order-status}")
     public void listen(UpdateStatusSchema message) throws Exception {
         var command = UpdateOrderStatusCommand.with(message.orderId(), OrderStatus.valueOf(message.status()));
         this.updateOrderStatusUseCase.execute(command);
