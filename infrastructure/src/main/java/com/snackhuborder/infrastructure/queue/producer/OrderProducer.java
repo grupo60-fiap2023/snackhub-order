@@ -1,9 +1,8 @@
 package com.snackhuborder.infrastructure.queue.producer;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.snackhuborder.infrastructure.order.models.queue.OrderSchema;
 import com.snackhuborder.infrastructure.order.models.queue.OrderSuccessfulSchema;
+import com.snackhuborder.infrastructure.order.models.queue.OrderSchema;
 import io.awspring.cloud.sqs.operations.SqsTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;

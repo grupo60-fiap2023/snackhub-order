@@ -1,10 +1,10 @@
 package com.snackhuborder.infrastructure.order.models.queue;
 
-import java.util.List;
+import java.math.BigDecimal;
 
-public record OrderSchema (
+public record OrderSchema(
         Long orderId,
-        String orderIdentifier,
-        List<OrderItemSchema> items
-) {
+        Long customerId,
+        BigDecimal value,
+        String orderIdentifier) {
 }

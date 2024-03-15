@@ -15,11 +15,3 @@ server:
       worker: 10
       io: 2
 
-#cloud:
-#  sqs:
-#    aws-region: us-east-1
-#    order: https://sqs.us-east-1.amazonaws.com/622646576227/order-topic
-#    order-successful: https://sqs.us-east-1.amazonaws.com/622646576227/order-successful-topic
-#    order-status: https://sqs.us-east-1.amazonaws.com/622646576227/order-status-topic
-#    accessKeyId:
-#    secretAccessKey:
