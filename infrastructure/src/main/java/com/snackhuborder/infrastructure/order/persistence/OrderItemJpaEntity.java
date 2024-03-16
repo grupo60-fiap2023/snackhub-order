@@ -5,7 +5,7 @@ import com.snackhuborder.domain.order.OrderItem;
 import com.snackhuborder.domain.order.OrderItemCategory;
 import com.snackhuborder.domain.order.OrderItemId;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.math.BigDecimal;
 
 @Entity(name = "OrderItem")
@@ -37,35 +37,39 @@ public class OrderItemJpaEntity {
     public OrderItemJpaEntity() {
     }
 
-    public OrderItemJpaEntity(Long id, String name, BigDecimal price, Integer quantity, OrderItemCategory category) {
+    public OrderItemJpaEntity(Long id, String name, BigDecimal price, Integer quantity, OrderItemCategory category, OrderJpaEntity orderJpaEntity) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.quantity = quantity;
         this.category = category;
+        this.orderJpaEntity = orderJpaEntity;
     }
-    public OrderItemJpaEntity(String name, BigDecimal price, Integer quantity, OrderItemCategory category) {
+    public OrderItemJpaEntity(String name, BigDecimal price, Integer quantity, OrderItemCategory category, OrderJpaEntity orderJpaEntity) {
         this.name = name;
         this.price = price;
         this.quantity = quantity;
         this.category = category;
+        this.orderJpaEntity = orderJpaEntity;
     }
 
-    public static OrderItemJpaEntity create(final OrderItem orderItem) {
+    public static OrderItemJpaEntity create(final OrderItem orderItem, final OrderJpaEntity orderJpaEntity) {
         return new OrderItemJpaEntity(
                 orderItem.getName(),
                 orderItem.getPrice(),
                 orderItem.getQuantity(),
-                orderItem.getCategory());
+                orderItem.getCategory(),
+                orderJpaEntity);
 
     }
-    public static OrderItemJpaEntity from(final OrderItem orderItem) {
+    public static OrderItemJpaEntity from(final OrderItem orderItem,  final OrderJpaEntity orderJpaEntity) {
         return new OrderItemJpaEntity(
                 orderItem.getId().getValue(),
                 orderItem.getName(),
                 orderItem.getPrice(),
                 orderItem.getQuantity(),
-                orderItem.getCategory());
+                orderItem.getCategory(),
+                orderJpaEntity);
     }
 
     public OrderItem toAggregate() {

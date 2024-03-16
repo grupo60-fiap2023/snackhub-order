@@ -9,8 +9,8 @@ import com.snackhuborder.domain.order.Order;
 import com.snackhuborder.domain.order.OrderGateway;
 import com.snackhuborder.domain.order.OrderId;
 import com.snackhuborder.domain.order.OrderStatus;
-import com.snackhuborder.infrastructure.order.models.CreateOrderRequest;
-import com.snackhuborder.infrastructure.order.models.UpdateStatusRequest;
+import com.snackhuborder.infrastructure.order.models.api.CreateOrderRequest;
+import com.snackhuborder.infrastructure.order.models.api.UpdateStatusRequest;
 import com.snackhuborder.infrastructure.util.OrderHelper;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -69,7 +69,7 @@ class OrderControllerTest {
         void shouldSaveOrder() throws Exception {
             CreateOrderRequest request = OrderHelper.getOrderRequest();
 
-            when(orderGateway.save(any(Order.class)))
+            when(orderGateway.create(any(Order.class)))
                     .thenAnswer(i -> i.getArgument(0));
 
             mockMvc.perform(post("/orders/createOrder")
@@ -77,14 +77,14 @@ class OrderControllerTest {
                             .content(asJsonString(request)))
                     .andExpect(status().isCreated());
             verify(orderGateway, times(1))
-                    .save(any(Order.class));
+                    .create(any(Order.class));
         }
 
         @Test
         void shouldThrowException_whenSaveOrder_EmptyItems() throws Exception {
             CreateOrderRequest request = OrderHelper.getOrderRequestWithoutItems();
 
-            when(orderGateway.save(any(Order.class)))
+            when(orderGateway.create(any(Order.class)))
                     .thenAnswer(i -> i.getArgument(0));
 
             mockMvc.perform(post("/orders/createOrder")
@@ -92,14 +92,14 @@ class OrderControllerTest {
                             .content(asJsonString(request)))
                     .andExpect(status().isUnprocessableEntity());
             verify(orderGateway,  never())
-                    .save(any(Order.class));
+                    .create(any(Order.class));
         }
 
         @Test
         void shouldThrowException_whenSaveOrder_InvalidItem() throws Exception {
             CreateOrderRequest request = OrderHelper.getOrderRequestWithouMandadoryItemField();
 
-            when(orderGateway.save(any(Order.class)))
+            when(orderGateway.create(any(Order.class)))
                     .thenAnswer(i -> i.getArgument(0));
 
             mockMvc.perform(post("/orders/createOrder")
@@ -107,7 +107,7 @@ class OrderControllerTest {
                             .content(asJsonString(request)))
                     .andExpect(status().isUnprocessableEntity());
             verify(orderGateway,  never())
-                    .save(any(Order.class));
+                    .create(any(Order.class));
         }
     }
 

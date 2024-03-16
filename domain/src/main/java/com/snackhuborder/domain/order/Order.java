@@ -5,6 +5,7 @@ import com.snackhuborder.domain.Entity;
 import com.snackhuborder.domain.utils.InstantUtils;
 import com.snackhuborder.domain.validation.ValidationHandler;
 
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 
@@ -69,14 +70,20 @@ public class Order extends Entity<OrderId> {
     public OrderStatus getStatus() {
         return status;
     }
+
     public Instant getCreatedAt() {
         return createdAt;
     }
+
     public void changeStatus(OrderStatus newStatus){
         this.status = newStatus;
     }
 
     public String getOrderIdentifier() {
         return orderIdentifier;
+    }
+
+    public BigDecimal getTotal(){
+        return getItems().stream().map(OrderItem::getPrice).reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 }

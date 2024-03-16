@@ -21,7 +21,7 @@ public class CreateOrderUseCase extends UseCase<CreateOrderCommand, OrderOutput>
     }
 
     @Override
-    public OrderOutput execute(CreateOrderCommand command) {
+    public OrderOutput execute(CreateOrderCommand command) throws Exception {
         final var notification = Notification.create();
 
         Order order = Order.newOrder(getOrderItemsValid(command, notification), command.customerId(), command.orderIdentifier(), command.observation());
@@ -30,7 +30,7 @@ public class CreateOrderUseCase extends UseCase<CreateOrderCommand, OrderOutput>
         if(notification.hasError()){
             throw DomainException.with(notification.getErrors());
         }
-        return OrderOutput.from(this.orderGateway.save(order));
+        return OrderOutput.from(this.orderGateway.create(order));
     }
 
     private List<OrderItem> getOrderItemsValid(CreateOrderCommand command, Notification notification) {

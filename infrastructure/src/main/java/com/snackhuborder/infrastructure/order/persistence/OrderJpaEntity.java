@@ -3,8 +3,9 @@ package com.snackhuborder.infrastructure.order.persistence;
 import com.snackhuborder.domain.order.Order;
 import com.snackhuborder.domain.order.OrderId;
 import com.snackhuborder.domain.order.OrderStatus;
+import jakarta.persistence.Entity;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -79,7 +80,7 @@ public class OrderJpaEntity {
                 order.getStatus(),
                 order.getCreatedAt());
 
-        order.getItems().stream().map(OrderItemJpaEntity::create).forEach(orderJpaEntity.getItems()::add);
+        order.getItems().stream().map(orderItem -> OrderItemJpaEntity.create(orderItem, orderJpaEntity)).forEach(orderJpaEntity.getItems()::add);
 
         return orderJpaEntity;
     }
@@ -94,7 +95,7 @@ public class OrderJpaEntity {
                 order.getStatus(),
                 order.getCreatedAt());
 
-        order.getItems().stream().map(OrderItemJpaEntity::from).forEach(orderJpaEntity.getItems()::add);
+        order.getItems().stream().map(orderItem -> OrderItemJpaEntity.from(orderItem, orderJpaEntity)).forEach(orderJpaEntity.getItems()::add);
 
         return orderJpaEntity;
     }

@@ -1,4 +1,4 @@
-package com.snackhuborder.infrastructure.order.models;
+package com.snackhuborder.infrastructure.order.models.api;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

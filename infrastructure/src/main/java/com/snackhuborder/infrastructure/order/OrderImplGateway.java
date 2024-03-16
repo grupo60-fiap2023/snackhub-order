@@ -4,28 +4,38 @@ import com.snackhuborder.domain.order.Order;
 import com.snackhuborder.domain.order.OrderGateway;
 import com.snackhuborder.domain.order.OrderId;
 import com.snackhuborder.domain.order.OrderStatus;
+import com.snackhuborder.infrastructure.order.adapter.OrderAdapter;
 import com.snackhuborder.infrastructure.order.persistence.OrderJpaEntity;
 import com.snackhuborder.infrastructure.order.persistence.OrderRepository;
+
+import com.snackhuborder.infrastructure.queue.producer.OrderProducer;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
 @Component
-public class OrderMySQLGateway implements OrderGateway {
+public class OrderImplGateway implements OrderGateway {
 
     private final OrderRepository repository;
 
-    public OrderMySQLGateway(final OrderRepository repository) {
+    private final OrderProducer producer;
+
+    public OrderImplGateway(final OrderRepository repository, OrderProducer producer) {
         this.repository = repository;
+        this.producer = producer;
     }
 
     @Override
-    public Order save(Order order) {
-        return this.repository.save(OrderJpaEntity.create(order)).toAggregate();
+    @Transactional
+    public Order create(Order order) throws Exception {
+        Order orderSaved = this.repository.save(OrderJpaEntity.create(order)).toAggregate();
+        this.producer.sendOrder(OrderAdapter.toSchema(orderSaved));
+        return orderSaved;
     }
 
     @Override
@@ -49,8 +59,12 @@ public class OrderMySQLGateway implements OrderGateway {
     }
 
     @Override
-    public Order update(Order order) {
-        return this.repository.save(OrderJpaEntity.from(order)).toAggregate();
+    public Order update(Order order) throws Exception {
+        Order orderUpdated = this.repository.save(OrderJpaEntity.from(order)).toAggregate();
+        if(orderUpdated.getStatus().isPaymentAccept()){
+            this.producer.sendOrderSuccessful(OrderAdapter.toOrderSuccessful(orderUpdated));
+        }
+        return orderUpdated;
     }
 
     @Override

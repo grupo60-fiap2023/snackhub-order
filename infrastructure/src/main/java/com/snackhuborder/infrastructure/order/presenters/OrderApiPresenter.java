@@ -1,7 +1,7 @@
 package com.snackhuborder.infrastructure.order.presenters;
 
 import com.snackhuborder.application.order.OrderOutput;
-import com.snackhuborder.infrastructure.order.models.OrderResponse;
+import com.snackhuborder.infrastructure.order.models.api.OrderResponse;
 
 public interface OrderApiPresenter {
     static OrderResponse present(OrderOutput order) {

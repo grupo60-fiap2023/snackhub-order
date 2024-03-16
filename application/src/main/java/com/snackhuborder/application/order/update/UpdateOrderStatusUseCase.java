@@ -20,7 +20,7 @@ public class UpdateOrderStatusUseCase extends UseCase<UpdateOrderStatusCommand, 
     }
 
     @Override
-    public OrderOutput execute(UpdateOrderStatusCommand command) {
+    public OrderOutput execute(UpdateOrderStatusCommand command) throws Exception {
         Optional<Order> optionalOrder = this.orderGateway.findOrderById(OrderId.from(command.orderId()));
         if(optionalOrder.isEmpty()){
             throw DomainException.with(new Error("Ordem n\u00E3o existe"));

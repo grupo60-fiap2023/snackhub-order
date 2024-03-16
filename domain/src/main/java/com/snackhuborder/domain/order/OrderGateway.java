@@ -6,13 +6,13 @@ import java.util.Set;
 
 public interface OrderGateway {
 
-    Order save(Order order);
+    Order create(Order order) throws Exception;
 
     List<Order> findAllOrders();
 
     List<Order> findOrdersByStatus(OrderStatus status);
 
-    Order update(Order order);
+    Order update(Order order) throws Exception;
 
     Optional<Order> findOrderById(OrderId orderId);
 

@@ -17,7 +17,7 @@ public class FindAllOrdersUseCase extends NullaryUseCase<List<OrderOutput>> {
 
     @Override
     public List<OrderOutput> execute() {
-        Set<OrderStatus> statusList = new HashSet<>(Arrays.asList(OrderStatus.READY, OrderStatus.IN_PREPARATION, OrderStatus.RECEIVED));
+        Set<OrderStatus> statusList = new HashSet<>(Arrays.asList(OrderStatus.FINISHED, OrderStatus.IN_PREPARATION, OrderStatus.RECEIVED));
         return this.orderGateway.findAllOrdersByStatus(statusList).stream().map(OrderOutput::from).toList();
     }
 }

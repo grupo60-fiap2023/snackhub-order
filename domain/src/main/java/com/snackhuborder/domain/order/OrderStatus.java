@@ -3,9 +3,12 @@ package com.snackhuborder.domain.order;
 public enum OrderStatus {
 
     RECEIVED(1,"Recebido"),
-    IN_PREPARATION(2, "Em preparacao"),
-    READY(3, "Pronto"),
-    FINISHED(4,"Finalizado");
+    PENDING_PAYMENT(2, "Pagamento Pendente"),
+    PAYMENT_ACCEPT(3, "Pagamento Aprovado"),
+    PAYMENT_REJECT(4, "Pagamento Rejeitado"),
+    WAIT_PREPARATION(5, "Aguardando Preparacao"),
+    IN_PREPARATION(6, "Em preparacao"),
+    FINISHED(7,"Finalizado");
 
     private final Integer id;
     private final String name;
@@ -21,5 +24,9 @@ public enum OrderStatus {
 
     public Integer getId() {
         return id;
+    }
+
+    public boolean isPaymentAccept(){
+        return PAYMENT_ACCEPT.equals(this);
     }
 }

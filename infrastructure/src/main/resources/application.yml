@@ -12,6 +12,9 @@ server:
       io: 4 # One IO thread per CPU core is a reasonable default: https://undertow.io/undertow-docs/undertow-docs-2.1.0/index.html#listeners-2
 
 spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
   datasource:
     url: jdbc:mysql://${mysql.url}:${mysql.port}/${mysql.schema}?autoReconnect=true&useSSL=true&serverTimezone=UTC&characterEncoding=UTF-8
     username: ${mysql.username}
@@ -28,7 +31,7 @@ spring:
     open-in-view: false
     show-sql: true
     properties:
-      "[hibernate.dialect]": org.hibernate.dialect.MySQL5InnoDBDialect
+      "[hibernate.dialect]": org.hibernate.dialect.MySQL8Dialect
       "[hibernate.generate_statistics]": false
       "[hibernate.connection.provider_disables_autocommit]": true
 management:
