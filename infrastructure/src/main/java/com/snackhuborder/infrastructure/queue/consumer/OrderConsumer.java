@@ -25,7 +25,9 @@ public class OrderConsumer {
 
     @SqsListener("${cloud.sqs.order-status}")
     public void listen(String message) throws Exception {
+        System.out.println("Order Status message received in Order Service: " + message);
         UpdateStatusSchema status = objectMapper.readValue(message, UpdateStatusSchema.class);
+        System.out.println("Call Use Case Update Status");
         var command = UpdateOrderStatusCommand.with(status.orderId(), OrderStatus.valueOf(status.status()));
         this.updateOrderStatusUseCase.execute(command);
     }

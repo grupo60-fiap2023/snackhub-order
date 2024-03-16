@@ -24,12 +24,14 @@ public class OrderProducer {
     public void sendOrderSuccessful(OrderSuccessfulSchema schema) throws Exception {
         String sqsUrlOrderSuccessful = environment.getProperty("cloud.sqs.order-successful");
         String orderSuccessfulJson = objectMapper.writeValueAsString(schema);
+        System.out.println("Produce to Order Successful: " + orderSuccessfulJson);
         sqsTemplate.send(sqsUrlOrderSuccessful, orderSuccessfulJson);
     }
 
     public void sendOrder(OrderSchema schema) throws Exception {
         String sqsUrlOrderStatus = environment.getProperty("cloud.sqs.order");
         String orderJson = objectMapper.writeValueAsString(schema);
+        System.out.println("Produce to Order: " + orderJson);
         sqsTemplate.send(sqsUrlOrderStatus, orderJson);
     }
 }
