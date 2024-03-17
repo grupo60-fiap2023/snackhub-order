@@ -48,102 +48,71 @@ Essa camada é responsável por lidar com os detalhes técnicos, como o acesso a
 # Persistência
 No microserviço estamos utilizando um banco de dados relacional (SQL) MySQL.
 
-# Cobertura e Qualidade
+# Arquitetura SAGA
 
-Nossa pipeline no Github Actions é realizada todas as etapas de build, analise e deploy da aplicação.
+### Escolhendo a abordagem coreografada no padrão SAGA de microserviços
 
-Na Step Build and analyze:
+## O que é o padrão SAGA?
 
-![img.png](readmefiles/stepbuild.png)
+O padrão SAGA é uma técnica para manter a consistência dos dados em sistemas distribuídos, especialmente em arquiteturas de microserviços. O padrão foi criado com o desafio das transações distribuídas, onde uma operação pode envolver vários serviços que precisam ser coordenados de forma consistente.
 
-- Build do microserviço
-- Execução de todos os tipos de testes
-- Geração de relatórios de testes e cobertura
-- Envio das informações do projeto ao SonarCloud
+### Existem duas abordagens principais dentro do padrão SAGA:  coreografia e orquestração
 
-https://sonarcloud.io/summary/overall?id=grupo60-fiap2023_snackhub-order
+- Coreografia: Os serviços colaboram entre si, sem a necessidade de um controlador central. Cada serviço é responsável por suas próprias ações e reage a eventos gerados por outros serviços.
 
-![img.png](readmefiles/sonarcloud.png)
-* os 3 code smell serão customizados na regra do Sonar, pois foram analisados pela equipe e será uma prática.
+- Orquestração: Envolve um serviço centralizado (geralmente chamado de orquestrador) que coordena e controla as transações entre os serviços participantes.
 
-No SonarCloud é avaliado:
-- Prováveis Bugs
-- Qualidade do fonte
-- Linhas duplicadas
-- Conbertura do fonte por testes
+Vantagem da abordagem coreografada no padrão SAGA?
 
-Como pode ser visto na imagem e no link a Cobertura hoje do serviço está em 97,5%.
+- Desacoplamento: A abordagem coreografada promove um maior desacoplamento entre os serviços. Cada serviço conhece apenas as interações com os outros serviços com os quais precisa se comunicar diretamente. Isso facilita a manutenção, escalabilidade e evolução do sistema, já que as mudanças em um serviço têm menos impacto nos outros.
 
-O nosso serviço também tem uma configuração no qual a pipeline irá falhar caso um novo fonte acabe baixando a cobertura do fonte inferior a 85%:
+- Escalabilidade: Como não há um ponto central de coordenação, a abordagem coreografada pode ser mais escalável em ambientes onde a carga é distribuída de forma desigual entre os serviços. Cada serviço pode escalar independentemente para atender à demanda.
 
-![img.png](readmefiles/configcoverage.png)
+- Resiliência: A coreografia distribui a lógica de coordenação entre os serviços participantes. Isso significa que o sistema pode continuar funcionando mesmo se alguns serviços estiverem inativos, desde que outros serviços ainda possam operar independentemente.
+
+- Flexibilidade: A abordagem coreografada é mais flexível em termos de evolução do sistema. Novos serviços podem ser adicionados e serviços existentes podem ser modificados sem a necessidade de alterações significativas no orquestrador central.
+
+- Menos ponto único de falha: Em uma abordagem orquestrada, o orquestrador central pode se tornar um ponto único de falha e um gargalo de desempenho. Na coreografia, não há esse risco, pois não há um ponto centralizado de controle.
+
+### Conclusão
+
+Embora a escolha entre orquestração e coreografia no padrão SAGA dependa das necessidades específicas do sistema, a abordagem coreografada oferece vantagens significativas em termos de desacoplamento, escalabilidade, resiliência, flexibilidade e robustez contra falhas. Ao optar por uma abordagem coreografada, deixamos nossos serviços mais resilientes, flexíveis e escaláveis. 
 
 
-## Tipos de Testes Implementados
-## Teste de unidade
-Todos módulos implementados no serviço possuem testes de unidade implementados com o JUnit.
+## Explicação SAGA e AWS
+[Vídeo Explicativo da FASE 5](https://www.youtube.com/watch?v=l5SeNVO6qpA)
 
-![img.png](readmefiles/junit.png)
 
-*ver nos módulos package de teste
+### Organização dos Serviços seguindo o padrão SAGA escolhido
 
-## Integração
+![Tech5 (2).jpg](readmefiles%2FTech5%20%282%29.jpg)
 
-Nos testes de integração foi utilizado o SpringBootTest. Em testes que necessitavam simular a base de dados real foi utilizado o Banco em memória H2.
+## Arquitetura AWS
 
-![img.png](readmefiles/inetgracao.png)
+![FlowAws (1).jpg](readmefiles%2FFlowAws%20%281%29.jpg)
 
-Testes do módulo infrastructure
+## OWASP ZAP
 
-![img.png](readmefiles/infratest.png)
+O OWASP ZAP (Zed Attack Proxy) é uma ferramenta de segurança de software de código aberto usada para encontrar vulnerabilidades em aplicações da web durante o desenvolvimento e testes de segurança. Ele realiza varreduras automatizadas em aplicações da web em busca de falhas de segurança, como injeções de SQL, cross-site scripting (XSS) e outros tipos de vulnerabilidades comuns, ajudando a identificar e corrigir esses problemas antes que sejam explorados por invasores.
 
-*ver no módulo infrastructure testes com o final IT
+No Serviço foram feitas duas varreduas uma antes e depois dos ajustes citados nos relatórios.
 
-## BDD
-Utilizado o Cumcumber nos BDD.
+[Report 1](readmefiles%2Foswaspzapreport%2Fbefore%2F2024-03-17-ZAP-Report.html)
 
-![cucumber.png](readmefiles%2Fcucumber.png)
+Com os alertas citados foi implementado o XContentTypeOptionsHeaderFilter setando o header X-Content-Type-Options
 
-![img.png](readmefiles/cumcuber2.png)
+[Report 2](readmefiles%2Foswaspzapreport%2Fafter%2F2024-03-17-ZAP-Report-.html)
 
-## Teste de Carga
-Foi analisado o serviço com um teste de carga K6.
+Após a correção o report foi gerado sem alertas.
 
-![k6LoadTest.png](readmefiles%2Fk6LoadTest.png)
 
-## Execução dos testes por módulo
+### Execução da Aplicação
 
-A execução dos testes poderá ser visto pelo Sonar, mas segue a execução por módulo.
+Ao realizar o push no repositório do Github a pipeline do CI/CD além de verificar testes e compilar o serviço a mesma irá gerar a
+imagem docker do serviço e enviar para o ECR onde será atualizado o ECS do serviço.
 
-![img.png](readmefiles/infrateste.png)
+![deployaws.png](readmefiles%2Fdeployaws.png)
 
-![img.png](readmefiles/apptestes.png)
+#### Localmente
 
-![img.png](readmefiles/domaintestes.png)
-
-![coverage.png](readmefiles%2Fcoverage.png)
-
-## Como executar só com Docker?
-
-**1. Subir a aplicação e o banco de dados MySQL com Docker:**
-```shell
-docker-compose up -d
-```
-
-**2. URL de acesso:**
-
-http://localhost:8080/swagger-ui/index.html#
-
-# Step Deploy
-O último step da pipeline realiza de forma automatizada o deploy para a AWS.
-
-![img.png](readmefiles/deployaws.png)
-
-Serviço no ar:
-
-![img.png](readmefiles/service.png)
-
-# Proteção Repositório
-![img.png](readmefiles/github1.png)
-
-![img_1.png](readmefiles/github2.png)
+As variaveis presentes no arquivo application-development.yml devem ser configuradas. Os docker componse ajudará a subir o ambiente sem necessitar configurações extra.
