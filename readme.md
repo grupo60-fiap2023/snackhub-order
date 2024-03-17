@@ -95,13 +95,17 @@ Embora a escolha entre orquestração e coreografia no padrão SAGA dependa das 
 
 O OWASP ZAP (Zed Attack Proxy) é uma ferramenta de segurança de software de código aberto usada para encontrar vulnerabilidades em aplicações da web durante o desenvolvimento e testes de segurança. Ele realiza varreduras automatizadas em aplicações da web em busca de falhas de segurança, como injeções de SQL, cross-site scripting (XSS) e outros tipos de vulnerabilidades comuns, ajudando a identificar e corrigir esses problemas antes que sejam explorados por invasores.
 
-No Serviço foram feitas duas varreduas uma antes e depois dos ajustes citados nos relatórios.
+No Serviço foram feitas duas varreduas uma antes e depois dos ajustes citados nos relatórios (Foi adicionado os reports formato HTML e gerado em PDF).
 
 [Report 1](readmefiles%2Foswaspzapreport%2Fbefore%2F2024-03-17-ZAP-Report.html)
+
+[ZAP Scanning Report Before.pdf](readmefiles%2Foswaspzapreport%2FZAP%20Scanning%20Report%20Before.pdf)
 
 Com os alertas citados foi implementado o XContentTypeOptionsHeaderFilter setando o header X-Content-Type-Options
 
 [Report 2](readmefiles%2Foswaspzapreport%2Fafter%2F2024-03-17-ZAP-Report-.html)
+
+[ZAP Scanning Report After.pdf](readmefiles%2Foswaspzapreport%2FZAP%20Scanning%20Report%20After.pdf)
 
 Após a correção o report foi gerado sem alertas.
 
